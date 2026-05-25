@@ -22,6 +22,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    # temporary work-around to force nodejs 20 to nodejs 24
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
     steps:
     - uses: actions/checkout@v6
     - name: Set up JDK 25
