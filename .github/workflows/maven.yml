@@ -14,8 +14,8 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# permissions:
-#   contents: write # needed to post the dependency snapshot
+permissions:
+  contents: write # needed to post the dependency snapshot
 
 jobs:
   build:
