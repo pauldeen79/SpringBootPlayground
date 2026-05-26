@@ -50,7 +50,7 @@ jobs:
       run: |
         mvn -B package --file pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.organization=pauldeen79 \
-          -Dsonar.projectKey=SpringBootPlayground \
+          -Dsonar.projectKey=pauldeen79_SpringBootPlayground \
           -Dsonar.host.url=https://sonarcloud.io
     # Upload the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
