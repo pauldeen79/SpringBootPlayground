@@ -54,6 +54,6 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io
     # Upload the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@v5
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18f6b7d6 # v5.7.0
       with:
         ignore-maven-wrapper: true
