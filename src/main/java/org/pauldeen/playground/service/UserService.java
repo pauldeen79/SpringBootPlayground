@@ -16,4 +16,12 @@ public class UserService {
     public Optional<UserEntity> findById(Long id) {
         return repository.findById(id);
     }
+
+    public UserEntity save(UserEntity user) {
+        return repository.saveAndFlush(user);
+    }
+
+    public void delete(UserEntity user) {
+        repository.delete(user);
+    }
 }
