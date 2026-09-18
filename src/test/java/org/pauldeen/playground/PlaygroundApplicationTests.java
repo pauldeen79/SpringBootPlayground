@@ -18,7 +18,7 @@ class PlaygroundApplicationTests {
 	@Container
 	@ServiceConnection
 	static PostgreSQLContainer postgres =
-		new PostgreSQLContainer("postgres:18-alpine");
+		new PostgreSQLContainer("postgres:18.6");
 
     // 2. Kafka Container Setup
 	@Container
