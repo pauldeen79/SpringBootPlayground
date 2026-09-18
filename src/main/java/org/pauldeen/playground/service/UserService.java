@@ -4,12 +4,12 @@ import java.util.Optional;
 
 import org.pauldeen.playground.model.entity.UserEntity;
 import org.pauldeen.playground.repository.UserRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component
+@Service 
 public class UserService {
     private final UserRepository repository;
 
