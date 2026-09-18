@@ -49,13 +49,13 @@ jobs:
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required to pull PR metadata
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Your secure SonarCloud token
       run: |
-        mvn -B package --file pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+        ./mvnw -B package --file pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.organization=pauldeen79 \
           -Dsonar.projectKey=pauldeen79_SpringBootPlayground \
           -Dsonar.host.url=https://sonarcloud.io
     - name: Build with Maven
       if: github.actor == 'dependabot[bot]'
-      run: mvn -B package
+      run: ./mvnw -B package
     # Upload the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
       if: github.actor != 'dependabot[bot]'
