@@ -1,4 +1,4 @@
-package org.pauldeen.playground;
+package io.github.pauldeen79.springbootplayground;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,8 +17,7 @@ class PlaygroundApplicationTests {
     // 1. PostgreSQL Container Setup
 	@Container
 	@ServiceConnection
-	static PostgreSQLContainer postgres =
-		new PostgreSQLContainer("postgres:18.6");
+	static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:18.6");
 
     // 2. Kafka Container Setup
 	@Container

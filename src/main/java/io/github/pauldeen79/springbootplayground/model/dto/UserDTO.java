@@ -1,4 +1,4 @@
-package org.pauldeen.playground.model.dto;
+package io.github.pauldeen79.springbootplayground.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Value;

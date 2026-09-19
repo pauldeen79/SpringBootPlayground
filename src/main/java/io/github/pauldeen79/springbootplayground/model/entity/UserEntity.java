@@ -1,4 +1,4 @@
-package org.pauldeen.playground.model.entity;
+package io.github.pauldeen79.springbootplayground.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

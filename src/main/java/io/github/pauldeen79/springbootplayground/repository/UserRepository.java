@@ -1,6 +1,6 @@
-package org.pauldeen.playground.repository;
+package io.github.pauldeen79.springbootplayground.repository;
 
-import org.pauldeen.playground.model.entity.UserEntity;
+import io.github.pauldeen79.springbootplayground.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {

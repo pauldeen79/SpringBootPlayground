@@ -1,4 +1,4 @@
-package org.pauldeen.playground.model.exception;
+package io.github.pauldeen79.springbootplayground.model.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

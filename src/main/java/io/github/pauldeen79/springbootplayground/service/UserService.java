@@ -1,9 +1,9 @@
-package org.pauldeen.playground.service;
+package io.github.pauldeen79.springbootplayground.service;
 
 import java.util.Optional;
 
-import org.pauldeen.playground.model.entity.UserEntity;
-import org.pauldeen.playground.repository.UserRepository;
+import io.github.pauldeen79.springbootplayground.model.entity.UserEntity;
+import io.github.pauldeen79.springbootplayground.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

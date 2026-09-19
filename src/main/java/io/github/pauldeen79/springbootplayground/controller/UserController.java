@@ -1,9 +1,9 @@
-package org.pauldeen.playground.controller;
+package io.github.pauldeen79.springbootplayground.controller;
 
-import org.pauldeen.playground.model.dto.UserDTO;
-import org.pauldeen.playground.model.entity.UserEntity;
-import org.pauldeen.playground.model.exception.ResourceNotFoundException;
-import org.pauldeen.playground.service.UserService;
+import io.github.pauldeen79.springbootplayground.model.dto.UserDTO;
+import io.github.pauldeen79.springbootplayground.model.entity.UserEntity;
+import io.github.pauldeen79.springbootplayground.model.exception.ResourceNotFoundException;
+import io.github.pauldeen79.springbootplayground.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -15,7 +15,7 @@
             "type": "java",
             "name": "PlaygroundApplication",
             "request": "launch",
-            "mainClass": "org.pauldeen.playground.PlaygroundApplication",
+            "mainClass": "io.github.pauldeen79.springbootplayground.PlaygroundApplication",
             "projectName": "playground"
         }
     ]
