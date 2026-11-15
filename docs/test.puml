@@ -1,0 +1,29 @@
+@startuml
+ 
+package "Microservices" {
+ 
+[Customer Service] as customer
+[Order Service] as orders
+[Billing Service] as billing
+ 
+}
+ 
+database "Customer DB\n(PostgreSQL)" as pg_customer
+database "Billing DB\n(Sybase)" as sybase_billing
+ 
+queue "customer-events" as customer_events
+queue "order-events" as order_events
+ 
+customer --> pg_customer : JPA
+billing --> sybase_billing : JDBC
+ 
+customer --> customer_events : Publish
+orders --> customer_events : Subscribe
+ 
+orders --> order_events : Publish
+billing --> order_events : Subscribe
+ 
+orders --> customer : REST
+billing --> orders : REST
+ 
+@enduml

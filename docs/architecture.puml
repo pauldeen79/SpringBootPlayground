@@ -1,0 +1,12 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title System Context Diagram
+
+Person(customer, "Customer", "A user buying items on the platform.")
+System(shop, "E-Commerce System", "Handles cart management and order processing.")
+System_Ext(payment, "Payment Gateway", "Processes credit card transactions.")
+
+Rel(customer, shop, "Places orders using")
+Rel(shop, payment, "Processes payments via", "HTTPS")
+@enduml
