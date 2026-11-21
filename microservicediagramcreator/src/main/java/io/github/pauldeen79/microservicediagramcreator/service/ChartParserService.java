@@ -1,10 +1,11 @@
 package io.github.pauldeen79.microservicediagramcreator.service;
 
-import io.github.pauldeen79.microservicediagramcreator.model.ChartConfig;
-import io.github.pauldeen79.microservicediagramcreator.model.ValuesConfig;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
+
+import io.github.pauldeen79.microservicediagramcreator.model.chart.ChartConfig;
+import io.github.pauldeen79.microservicediagramcreator.model.chart.ValuesConfig;
 import tools.jackson.dataformat.yaml.YAMLMapper;
 
 import java.nio.file.Files;
