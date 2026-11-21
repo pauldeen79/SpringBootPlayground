@@ -1,4 +1,4 @@
-package io.github.pauldeen79.springbootplayground;
+package io.github.pauldeen79.microservicediagramcreator;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -10,6 +10,6 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "io.github.pauldeen79.springbootplayground")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "io.github.pauldeen79.microservicediagramcreator")
 class RunCucumberTest {
 }

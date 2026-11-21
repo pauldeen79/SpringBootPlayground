@@ -1,7 +1,7 @@
-package io.github.pauldeen79.springbootplayground.service;
+package io.github.pauldeen79.microservicediagramcreator.service;
 
-import io.github.pauldeen79.springbootplayground.model.ChartConfig;
-import io.github.pauldeen79.springbootplayground.model.ValuesConfig;
+import io.github.pauldeen79.microservicediagramcreator.model.ChartConfig;
+import io.github.pauldeen79.microservicediagramcreator.model.ValuesConfig;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;

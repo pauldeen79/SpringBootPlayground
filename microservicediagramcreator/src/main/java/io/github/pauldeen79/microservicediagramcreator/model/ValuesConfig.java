@@ -1,4 +1,4 @@
-package io.github.pauldeen79.springbootplayground.model;
+package io.github.pauldeen79.microservicediagramcreator.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;

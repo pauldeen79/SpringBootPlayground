@@ -1,11 +1,12 @@
-package io.github.pauldeen79.springbootplayground;
+package io.github.pauldeen79.microservicediagramcreator;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.pauldeen79.springbootplayground.service.ChartParserService;
+import io.github.pauldeen79.microservicediagramcreator.service.ChartParserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
