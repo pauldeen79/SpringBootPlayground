@@ -29,6 +29,10 @@ public class ChartParserService {
             return Optional.empty();
         }
 
+        if (config.type() == null || !config.type().equals("application")) {
+            return Optional.empty();
+        }
+
         return Optional.of(config.name().trim());
     }
 
