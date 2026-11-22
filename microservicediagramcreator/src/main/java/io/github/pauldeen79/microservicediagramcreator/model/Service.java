@@ -9,4 +9,16 @@ public record Service(
     List<ServiceDatabase> databases,
     List<ServiceRestClient> restClients) {
 
+    public record ServiceDatabase(
+        String name,
+        DatabaseType type,
+        boolean read,
+        boolean write) {
+    }
+
+    public record ServiceRestClient(String name) {
+    }
+
+    public record ServiceTopic(String name, boolean receive, boolean send) {
+    }
 }

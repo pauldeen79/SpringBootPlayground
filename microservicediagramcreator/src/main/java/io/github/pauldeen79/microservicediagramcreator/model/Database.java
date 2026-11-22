@@ -1,12 +1,13 @@
 package io.github.pauldeen79.microservicediagramcreator.model;
 
+import io.github.pauldeen79.microservicediagramcreator.model.Service.ServiceDatabase;
+import io.github.pauldeen79.microservicediagramcreator.util.StringUtils;
+
 public record Database(
     String name,
     String alias) {
 
-    public static Database fromServiceDatabase(io.github.pauldeen79.microservicediagramcreator.model.ServiceDatabase serviceDatabase) {
-        return new Database(serviceDatabase.name(), serviceDatabase.name()
-                .replace("-", "_")
-                .replace(" ", "_"));
+    public static Database fromServiceDatabase(ServiceDatabase serviceDatabase) {
+        return new Database(serviceDatabase.name(), StringUtils.toAlias(serviceDatabase.name()));
     }
 }
