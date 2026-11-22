@@ -1,4 +1,10 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cucumber.features": [
+        "**/src/test/resources/features/**/*.feature"
+    ],
+    "cucumber.glue": [
+        "**/src/test/java/**/*.java"
+    ]
 }
