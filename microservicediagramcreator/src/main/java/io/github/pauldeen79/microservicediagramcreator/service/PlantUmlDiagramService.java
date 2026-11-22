@@ -8,7 +8,7 @@ import io.github.pauldeen79.microservicediagramcreator.model.Database;
 import io.github.pauldeen79.microservicediagramcreator.model.Topic;
 
 @Service
-public class DiagramService {
+public class PlantUmlDiagramService {
 
     public String generateDiagram(String packageName, List<io.github.pauldeen79.microservicediagramcreator.model.Service> services) {
         var sb = new StringBuilder();

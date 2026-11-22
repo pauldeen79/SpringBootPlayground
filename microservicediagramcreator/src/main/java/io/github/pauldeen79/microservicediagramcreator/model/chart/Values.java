@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record ValuesConfig(
+public record Values(
     List<String> enableDefaultConfiguration,
     Service service,
     List<Volume> volumes

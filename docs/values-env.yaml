@@ -1,0 +1,43 @@
+---
+namespace: mycompany00-prd
+dns: mycompany.com
+
+replicaCount: 2
+
+secrets:
+  - name: my-custom-service-secret
+    data:
+      "my-custom-service-secret.yaml": "some-encoded-secret"
+
+configMaps:
+  - name: my-custom-service-config
+    data:
+      my-custom-service-config.yaml: |
+        com.mycompany:
+          security.oauth2:
+            resourceservers:
+              one:
+                jwt.issuer-uri: https://keycloak.apps.somewhere.mycompany.local/realms/production
+              two:
+                jwt.issuer-uri: https://api.ext.mycompany
+              three:
+                jwt.issuer-uri: https://access.mycompany
+          web.rest-clients:
+            first:
+              base-url: http://mycompany-first-resource-service:8080
+              auth.oauth-context: production
+            second:
+              base-url: http://mycompany-second-resource-service:8080
+              auth.oauth-context: production
+        spring:
+          datasource:
+            url: jdbc:postgresql://postgresql.prd-2r0c.prod.mycompany:5432/mycompany_my_custom_service_prd
+            driver-class-name: org.postgresql.Driver
+            hikari:
+              pool-name: HikariPool-my-custom-service
+              minimum-idle: 1
+              maximum-pool-size: 20
+          security.oauth2:
+            client:
+              provider.productie.issuer-uri: https://keycloak.apps.somewhere.mycompany.local/realms/production
+              registration.productie.authorization-grant-type: client_credentials

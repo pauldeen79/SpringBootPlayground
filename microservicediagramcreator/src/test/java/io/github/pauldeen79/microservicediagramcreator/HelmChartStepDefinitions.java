@@ -5,10 +5,12 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.pauldeen79.microservicediagramcreator.model.chart.ValuesConfig;
-import io.github.pauldeen79.microservicediagramcreator.service.ChartParserService;
+import io.github.pauldeen79.microservicediagramcreator.model.chart.EnvironmentValues;
+import io.github.pauldeen79.microservicediagramcreator.model.chart.Values;
+import io.github.pauldeen79.microservicediagramcreator.service.HelmChartParserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import tools.jackson.core.JacksonException;
 import tools.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.IOException;
@@ -21,13 +23,15 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ChartStepDefinitions {
+public class HelmChartStepDefinitions {
 
     @Autowired
-    private ChartParserService chartParserService;
+    private HelmChartParserService chartParserService;
 
     @Autowired
     private YAMLMapper yamlMapper;
@@ -35,7 +39,9 @@ public class ChartStepDefinitions {
     private Path tempChartDir;
     private Optional<String> resolvedServiceName;
     private boolean usesKafkaTopics;
-    private ValuesConfig valuesConfig;
+    private Values valuesConfig;
+    private List<EnvironmentValues.ParsedConfigMap> environmentConfigMaps;
+    private EnvironmentValues.MyCompanyConfig selectedConfig;
 
     @Before
     public void setUp() throws IOException {
@@ -85,7 +91,59 @@ public class ChartStepDefinitions {
 
     @When("the values file is deserialized")
     public void theValuesFileIsDeserialized() {
-        valuesConfig = yamlMapper.readValue(tempChartDir.resolve("values.yaml").toFile(), ValuesConfig.class);
+        valuesConfig = yamlMapper.readValue(tempChartDir.resolve("values.yaml").toFile(), Values.class);
+    }
+
+    @When("the environment ConfigMaps are parsed")
+    public void theEnvironmentConfigMapsAreParsed() {
+        environmentConfigMaps = chartParserService.parseEnvironmentConfigMaps(tempChartDir);
+    }
+
+    @Then("there should be {int} environment ConfigMaps")
+    public void thereShouldBeEnvironmentConfigMaps(int expectedCount) {
+        assertEquals(expectedCount, environmentConfigMaps.size());
+    }
+
+    @When("the data entry {string} from ConfigMap {string} is selected")
+    public void theDataEntryFromConfigMapIsSelected(String dataKey, String configMapName) {
+        EnvironmentValues.ParsedConfigMap configMap = environmentConfigMaps.stream()
+            .filter(candidate -> candidate.name().equals(configMapName))
+            .findFirst()
+            .orElseThrow(() -> new AssertionError("ConfigMap not found: " + configMapName));
+        selectedConfig = configMap.data().get(dataKey);
+        assertNotNull(selectedConfig, "ConfigMap data entry not found: " + dataKey);
+    }
+
+    @Then("the datasource URL should be {string}")
+    public void theDatasourceUrlShouldBe(String expectedUrl) {
+        assertEquals(expectedUrl, selectedConfig.spring().datasource().url());
+    }
+
+    @Then("the REST client {string} base URL should be {string}")
+    public void theRestClientBaseUrlShouldBe(String clientName, String expectedUrl) {
+        assertEquals(expectedUrl, selectedConfig.comMycompany().webRestClients().get(clientName).baseUrl());
+    }
+
+    @Then("the resource server {string} issuer URI should be {string}")
+    public void theResourceServerIssuerUriShouldBe(String serverName, String expectedUri) {
+        assertEquals(expectedUri,
+            selectedConfig.comMycompany().securityOauth2().resourceServers().get(serverName).jwtIssuerUri());
+    }
+
+    @Then("the datasource pool name should be {string}")
+    public void theDatasourcePoolNameShouldBe(String expectedName) {
+        assertEquals(expectedName, selectedConfig.spring().datasource().hikari().poolName());
+    }
+
+    @Then("the OAuth provider issuer URI should be {string}")
+    public void theOauthProviderIssuerUriShouldBe(String expectedUri) {
+        assertEquals(expectedUri, selectedConfig.spring().securityOauth2().client().providerProductieIssuerUri());
+    }
+
+    @Then("parsing environment ConfigMaps should fail")
+    public void parsingEnvironmentConfigMapsShouldFail() {
+        assertThrows(JacksonException.class,
+            () -> chartParserService.parseEnvironmentConfigMaps(tempChartDir));
     }
 
     @Then("the service name should be {string}")
