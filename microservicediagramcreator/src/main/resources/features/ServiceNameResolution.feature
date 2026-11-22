@@ -9,6 +9,7 @@ Feature: Resolve Service Name from Chart Configuration
       apiVersion: v2
       name: my-custom-service
       version: 1.0.0
+      type: application
       """
     When the service configuration is parsed
     Then the service name should be "my-custom-service"
@@ -23,6 +24,18 @@ Feature: Resolve Service Name from Chart Configuration
       """
       apiVersion: v2
       version: 1.0.0
+      type: application
+      """
+    When the service configuration is parsed
+    Then no service name should be resolved
+
+  Scenario: chart.yaml exists but the type attribute is not "application"
+    Given a chart directory containing a "chart.yaml" file with the following content:
+      """
+      apiVersion: v2
+      name: my-custom-service
+      version: 1.0.0
+      type: library
       """
     When the service configuration is parsed
     Then no service name should be resolved
