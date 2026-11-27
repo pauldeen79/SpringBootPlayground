@@ -24,7 +24,7 @@ Feature: Generate PlantUML Diagram
     And a service named "Invoice Service" with alias "invoice_service"
     And service "order_service" uses a "POSTGRESQL" database named "order-db"
     And service "invoice_service" uses a "SYBASE" database named "invoice-db"
-    And service "order_service" uses topic "order-events"
+    And service "order_service" publishes to topic "order-events"
     When the PlantUML diagram is generated
     Then the diagram should be:
       """
@@ -38,6 +38,9 @@ Feature: Generate PlantUML Diagram
       database "order-db" as order_db
       database "invoice-db" as invoice_db
       queue "order-events" as order_events
+      order_service --> order_db : JPA
+      invoice_service --> invoice_db : JDBC
+      order_service --> order_events : Publish
       @enduml
       """
 
@@ -58,6 +61,8 @@ Feature: Generate PlantUML Diagram
       }
 
       database "shared-db" as shared_db
+      order_service --> shared_db : JPA
+      invoice_service --> shared_db : JPA
       @enduml
       """
 
@@ -65,8 +70,8 @@ Feature: Generate PlantUML Diagram
     Given a diagram package named "my-landscape"
     And a service named "Order Service" with alias "order_service"
     And a service named "Invoice Service" with alias "invoice_service"
-    And service "order_service" uses topic "shared-events"
-    And service "invoice_service" uses topic "shared-events"
+    And service "order_service" publishes to topic "shared-events"
+    And service "invoice_service" subscribes to topic "shared-events"
     When the PlantUML diagram is generated
     Then the diagram should be:
       """
@@ -78,6 +83,27 @@ Feature: Generate PlantUML Diagram
       }
 
       queue "shared-events" as shared_events
+      order_service --> shared_events : Publish
+      invoice_service --> shared_events : Subscribe
+      @enduml
+      """
+
+  Scenario: A service calling another service through a REST client
+    Given a diagram package named "my-landscape"
+    And a service named "Order Service" with alias "order_service"
+    And a service named "Invoice Service" with alias "invoice_service"
+    And service "order_service" has a REST client for "Invoice Service"
+    When the PlantUML diagram is generated
+    Then the diagram should be:
+      """
+      @startuml
+
+      package "my-landscape" {
+      [Order Service] as order_service
+      [Invoice Service] as invoice_service
+      }
+
+      order_service --> invoice_service : REST
       @enduml
       """
 

@@ -39,10 +39,22 @@ public class PlantUmlDiagramStepDefinitions {
             .add(new Service.ServiceDatabase(databaseName, DatabaseType.valueOf(databaseType), true, true));
     }
 
-    @Given("service {string} uses topic {string}")
-    public void serviceUsesTopic(String serviceAlias, String topicName) {
+    @Given("service {string} publishes to topic {string}")
+    public void servicePublishesToTopic(String serviceAlias, String topicName) {
         findService(serviceAlias).topics()
-            .add(new Service.ServiceTopic(topicName, true, true));
+            .add(new Service.ServiceTopic(topicName, false, true));
+    }
+
+    @Given("service {string} subscribes to topic {string}")
+    public void serviceSubscribesToTopic(String serviceAlias, String topicName) {
+        findService(serviceAlias).topics()
+            .add(new Service.ServiceTopic(topicName, true, false));
+    }
+
+    @Given("service {string} has a REST client for {string}")
+    public void serviceHasARestClientFor(String serviceAlias, String targetServiceName) {
+        findService(serviceAlias).restClients()
+            .add(new Service.ServiceRestClient(targetServiceName));
     }
 
     @When("the PlantUML diagram is generated")
