@@ -13,18 +13,16 @@ public class PlantUmlDiagramService {
     public String generateDiagram(String packageName, List<io.github.pauldeen79.microservicediagramcreator.model.Service> services) {
         var sb = new StringBuilder();
 
-        sb.append("@startuml%n%n");
+        sb.append("@startuml%n%n".formatted());
 
-        sb.append("package \"");
-        sb.append(packageName);
-        sb.append("\" {%n");
+        sb.append("package \"%s\" {%n".formatted(packageName));
 
         services
              .forEach(service ->
                  sb.append("[%s] as %s%n"
                      .formatted(service.name(), service.alias())));
 
-        sb.append("}%n%n");
+        sb.append("}%n%n".formatted());
 
         var databases = services.stream()
                 .flatMap(service -> service.databases().stream())
