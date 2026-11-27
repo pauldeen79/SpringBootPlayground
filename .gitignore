@@ -59,3 +59,6 @@ build/
 # --- OS ---
 .DS_Store
 Thumbs.db
+
+# Ignore changes by dependabot in this file
+mvnw.cmd
